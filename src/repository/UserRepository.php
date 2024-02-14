@@ -9,9 +9,7 @@ class UserRepository extends Repository
     public function getUser(string $email): ?User
     {
         $stmt = $this->database->connect()->prepare('
-            SELECT * FROM customer u LEFT JOIN customer_details ud 
-            ON u.detail_id = ud.id WHERE email = :email
-        ');
+            SELECT * FROM public.users WHERE email = :email');
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt->execute();
 
@@ -25,43 +23,32 @@ class UserRepository extends Repository
 
             $user['email'],
             $user['password'],
-            $user['name'],
-            $user['surname'],
-            $user['id'],
-            $user['role']
+            $user['name'] ??'user',
+            $user['role']??'user'
         );
     }
 
     public function addUser(User $user)
     {
-        $stmt = $this->database->connect()->prepare('
-            INSERT INTO public.customer_details (name, surname)
-            VALUES (?, ?)
-        ');
+        $stmt = $this->database->connect()->prepare("
+    INSERT INTO public.users (name,password,email,role)  VALUES (?,?,?,?)");
 
         $stmt->execute([
             $user->getName(),
-            $user->getSurname(),
-        ]);
-
-        $stmt = $this->database->connect()->prepare('
-            INSERT INTO public.customer (detail_id, email, password)
-            VALUES (?, ?, ?)
-        ');
-
-        $stmt->execute([
-            $this->getUserDetailsId($user),
+            $user->getPassword(),
             $user->getEmail(),
-            $user->getPassword()
+            $user->getRole()
         ]);
+
     }
+
 
     public function getUsers(): array
     {
         $result = [];
 
         $stmt = $this->database->connect()->prepare('
-            SELECT * FROM public.customer;
+            SELECT * FROM public.users;
         ');
         $stmt->execute();
         $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -71,28 +58,11 @@ class UserRepository extends Repository
                 $user['email'],
                 $user['password'],
                 $user['name'],
-                $user['surname'],
-                $user['id'],
-                $user['role'],
+                $user['role']
             );
         }
-
         return $result;
     }
-    public function getUserDetailsId(User $user): int
-    {
-        $stmt = $this->database->connect()->prepare('
-            SELECT * FROM public.customer_details WHERE name = :name AND surname = :surname
-        ');
-        $stmt->bindParam(':name', $user->getName(), PDO::PARAM_STR);
-        $stmt->bindParam(':surname', $user->getSurname(), PDO::PARAM_STR);
-        $stmt->execute();
 
-        $data = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($data === false) {
-            throw new Exception('User details not found.');
-        }
-        return $data['id'];
-    }
 
 }

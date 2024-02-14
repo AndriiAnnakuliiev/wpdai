@@ -1,6 +1,6 @@
 <?php
 
 const USERNAME = 'postgres';
-const PASSWORD = '1234';
-const HOST = 'localhost';
+const PASSWORD = 'password';
+const HOST = 'db';
 const DATABASE = 'postgres';

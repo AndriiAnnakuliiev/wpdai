@@ -31,10 +31,7 @@ href="public/css/registration.css">
             <label for="name">Name</label>
             <input type="text" id="name" name="name" required>
         </div>
-        <div class="form-group surname-field">
-            <label for="surname">Surname</label>
-            <input type="text" id="surname" name="surname" required>
-    </div>
+
     <div class="form-group">
         <label for="email">Email address</label>
         <input type="email" name="email" id="email" required>

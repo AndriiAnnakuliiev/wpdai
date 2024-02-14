@@ -26,7 +26,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css
         <nav>
             <ul>    
                 <li><a href="home">Home</a></li>
-                <li><a href="#">About us</a></li>
+                <li><a href="#">About</a></li>
                 <?php if (isset($_SESSION['user']) || isset($_SESSION['admin'])): ?>
                     <li><a href="/logout" id="logoutButton">Log out</a></li>
                 <?php else: ?>
@@ -39,7 +39,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css
     </header>
   <div class="container_pc">
   <div class="PC">
-    <img src="public/img/pc-1.jpg" alt="pc-1">
+    <img src="public/img/map.jpg" alt="map">
   </div>
   <div class="company-info">
     <h3>	Working Hours</h3>

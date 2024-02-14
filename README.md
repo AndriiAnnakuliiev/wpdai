@@ -27,7 +27,7 @@ To get a copy of the project up and running on your local machine for developmen
 
 1. Clone the repository to your local machine:
    ```sh
-   git clone https://github.com/username/techcustomize.git
+   git clone https://github.com/AndriiAnnakuliiev/wpdai.git
 2. Navigate to the project directory:
   cd techcustomize
 3. Set up your database by importing the provided SQL schema located in the database directory.

@@ -1,7 +1,6 @@
 <?php
 
 class User {
-    private $id;
 
     private $email;
     private $password;
@@ -12,14 +11,12 @@ class User {
     public function __construct(
         string $email,
         string $password,
-        string $name,
-        int $id=null,
-        $role='user'
+        string $name='user',
+        string $role='user'
     ) {
         $this->email = $email;
         $this->password = $password;
         $this->name = $name;
-        $this->id = $id;
         $this->role = $role;
     }
 
@@ -27,11 +24,22 @@ class User {
     {
         return $this->email;
     }
+    public function setEmail(string $email)
+    {
+        $this->email=$email;
+    }
 
-    public function getPassword()
+
+    public function getPassword():string
     {
         return $this->password;
     }
+
+    public function setPassword(string $password)
+    {
+        $this->password=$password;
+    }
+
 
     public function getName(): string
     {
@@ -43,17 +51,9 @@ class User {
         $this->name = $name;
     }
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
-    public function setId(?int $id): void
-    {
-        $this->id = $id;
-    }
 
-    public function getRole()
+    public function getRole():string
     {
         return $this->role;
     }

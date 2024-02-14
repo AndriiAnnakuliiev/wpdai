@@ -10,6 +10,7 @@ Routing::get('about', 'DefaultController');
 Routing::get('pc', 'DefaultController');
 
 Routing::post('login', 'SecurityController');
+Routing::post('logout', 'SecurityController');
 Routing::post('registration', 'SecurityController');
 
 
